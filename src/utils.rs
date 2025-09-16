@@ -12,6 +12,15 @@ pub fn get_nekos_list(count: u8) -> Result<ListNekos, reqwest::Error> {
     let res: ListNekos = serde_json::from_str(&req.text().unwrap_or_default()).unwrap_or_default();
     Ok(res)
 }
+
+pub fn get_waifus_list(tag: &str) -> Result<ListWaifus, reqwest::Error> {
+    let req = reqwest::blocking::get(crate::WAIFU_URL)?.error_for_status()?;
+
+    let res: ListWaifus = serde_json::from_str(&req.text().unwrap_or_default()).unwrap_or_default();
+
+    Ok(res)
+}
+
 pub fn save_nekos_list(list_nekos: &ListNekos) -> Result<(), reqwest::Error> {
     for image in &list_nekos.images {
         image.save(&("./images/neko_".to_string() + &image.id + ".png"))?;
@@ -20,7 +29,6 @@ pub fn save_nekos_list(list_nekos: &ListNekos) -> Result<(), reqwest::Error> {
 }
 pub fn save_image(url: &str, path: &str) -> Result<(), reqwest::Error> {
     let mut req = reqwest::blocking::get(url)?.error_for_status()?;
-
     let file = OpenOptions::new()
         .create(true)
         .truncate(true)
