@@ -43,12 +43,16 @@ pub fn save_img_clipboard(path: &str) -> bool {
 }
 
 pub fn send_notification(name: &str, msg: &str) -> bool {
+    let path = std::env::current_dir().unwrap();
+
     process::Command::new("sh")
         .args(&[
             "-c",
             &format!(
-                "notify-send -i \"/usr/share/icons/uwuio/icon.png\" \"{}\" \"{}\"",
-                name, msg
+                "notify-send -i \"{}/icon.png\" \"{}\" \"{}\"",
+                path.to_str().unwrap_or_default(),
+                name,
+                msg
             ),
         ])
         .spawn()

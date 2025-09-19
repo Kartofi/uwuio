@@ -1,3 +1,5 @@
+use std::fs;
+
 mod structs;
 mod utils;
 
@@ -6,7 +8,13 @@ const NEKOS_IMAGE_URL: &str = "https://nekos.moe/image/";
 
 const WAIFU_URL: &str = "https://api.waifu.im/search?included_tags=waifu&included_tags=maid";
 
+const ICON_DATA: &[u8] = include_bytes!(".././icon.png");
+
 fn main() {
+    if !fs::exists("./icon.png").unwrap_or_default() {
+        fs::write("./icon.png", ICON_DATA).unwrap_or_default();
+    }
+
     let args: Vec<String> = std::env::args().collect();
 
     if args.len() < 2 {
@@ -32,16 +40,19 @@ fn main() {
 fn handle_neko() {
     let list_nekos = utils::get_nekos_list(1).unwrap_or_default();
     let image = list_nekos.images.first().unwrap();
-    image.save("./tmp.png").unwrap();
-    utils::save_img_clipboard("./tmp.png");
+    image.save("./uwuio_tmp.png").unwrap();
+    utils::save_img_clipboard("./uwuio_tmp.png");
 
-    utils::send_notification("uwuio", "Saved neko image to clipboard <3");
+    utils::send_notification("uwuio <3", "Saved neko image to clipboard <3");
 }
 fn handle_waifu(tag: &str) {
     let list_waifu = utils::get_waifus_list(tag).unwrap_or_default();
     let image = list_waifu.images.first().unwrap();
-    image.save("./tmp.png").unwrap();
-    utils::save_img_clipboard("./tmp.png");
+    image.save("./uwuio_tmp.png").unwrap();
+    utils::save_img_clipboard("./uwuio_tmp.png");
 
-    utils::send_notification("uwuio", &format!("Saved waifu {} image to clipboard <3", tag));
+    utils::send_notification(
+        "uwuio <3",
+        &format!("Saved waifu {} image to clipboard <3", tag),
+    );
 }
