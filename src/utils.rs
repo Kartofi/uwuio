@@ -21,12 +21,6 @@ pub fn get_waifus_list(tag: &str) -> Result<ListWaifus, reqwest::Error> {
     Ok(res)
 }
 
-pub fn save_nekos_list(list_nekos: &ListNekos) -> Result<(), reqwest::Error> {
-    for image in &list_nekos.images {
-        image.save(&("./images/neko_".to_string() + &image.id + ".png"))?;
-    }
-    Ok(())
-}
 pub fn save_image(url: &str, path: &str) -> Result<(), reqwest::Error> {
     let mut req = reqwest::blocking::get(url)?.error_for_status()?;
     let file = OpenOptions::new()
@@ -49,16 +43,12 @@ pub fn save_img_clipboard(path: &str) -> bool {
 }
 
 pub fn send_notification(name: &str, msg: &str) -> bool {
-    let path = std::env::current_dir().unwrap();
-
     process::Command::new("sh")
         .args(&[
             "-c",
             &format!(
-                "notify-send -i \"{}/icon.png\" \"{}\" \"{}\"",
-                path.to_str().unwrap_or_default(),
-                name,
-                msg
+                "notify-send -i \"/usr/bin/icon.png\" \"{}\" \"{}\"",
+                name, msg
             ),
         ])
         .spawn()

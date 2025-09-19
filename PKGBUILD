@@ -1,6 +1,6 @@
 # Maintainer: Kartofi <kartofdev@gmail.com>
 pkgname=uwuio
-pkgver=1.0.0
+pkgver=1.0.2
 pkgrel=1
 pkgdesc="Anime girls on the GO!"
 arch=('x86_64')
@@ -32,5 +32,5 @@ check() {
 package() {
   cd "$pkgname-$pkgver"
   install -Dm755 "target/release/uwuio" "$pkgdir/usr/bin/uwuio"
-  install -Dm644 "icon.png" "$pkgdir/usr/bin/icon.png"
+  install -Dm644 "icon.png" "$pkgdir/usr/share/icons/uwuio/icon.png"
 }
