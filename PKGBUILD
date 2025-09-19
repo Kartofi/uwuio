@@ -1,6 +1,6 @@
 # Maintainer: Kartofi <kartofdev@gmail.com>
 pkgname=uwuio
-pkgver=1.0.2
+pkgver=1.0.3
 pkgrel=1
 pkgdesc="Anime girls on the GO!"
 arch=('x86_64')
