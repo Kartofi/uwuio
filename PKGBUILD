@@ -32,4 +32,5 @@ check() {
 package() {
   cd "$pkgname-$pkgver"
   install -Dm755 "target/release/uwuio" "$pkgdir/usr/bin/uwuio"
+  install -Dm644 "icon.png" "$pkgdir/usr/bin/icon.png"
 }
