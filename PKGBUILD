@@ -2,13 +2,13 @@
 pkgname=uwuio
 pkgver=1.0.0
 pkgrel=1
-pkgdesc="Simple emoji picker for hyprland people"
+pkgdesc="Anime girls on the GO!"
 arch=('x86_64')
-url="https://github.com/Kartofi/korki"
+url="https://github.com/Kartofi/uwuio"
 license=('MIT' 'Apache') # Adjust based on your actual license
-depends=('gtk4')
+depends=()
 makedepends=('cargo' 'git')
-source=("$pkgname-$pkgver.tar.gz::https://github.com/Kartofi/korki/archive/refs/tags/v$pkgver.tar.gz")
+source=("$pkgname-$pkgver.tar.gz::https://github.com/Kartofi/uwuio/archive/refs/tags/v$pkgver.tar.gz")
 sha256sums=('SKIP') # Replace with actual checksum later
 
 prepare() {
@@ -31,5 +31,5 @@ check() {
 
 package() {
   cd "$pkgname-$pkgver"
-  install -Dm755 "target/release/korki" "$pkgdir/usr/bin/korki"
+  install -Dm755 "target/release/uwuio" "$pkgdir/usr/bin/uwuio"
 }
