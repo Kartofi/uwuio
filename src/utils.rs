@@ -47,3 +47,20 @@ pub fn save_img_clipboard(path: &str) -> bool {
         .spawn()
         .is_ok()
 }
+
+pub fn send_notification(name: &str, msg: &str) -> bool {
+    let path = std::env::current_dir().unwrap();
+
+    process::Command::new("sh")
+        .args(&[
+            "-c",
+            &format!(
+                "notify-send -i \"{}/icon.png\" \"{}\" \"{}\"",
+                path.to_str().unwrap_or_default(),
+                name,
+                msg
+            ),
+        ])
+        .spawn()
+        .is_ok()
+}
