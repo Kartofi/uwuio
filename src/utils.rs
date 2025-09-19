@@ -47,7 +47,7 @@ pub fn send_notification(name: &str, msg: &str) -> bool {
         .args(&[
             "-c",
             &format!(
-                "notify-send -i \"/usr/bin/icon.png\" \"{}\" \"{}\"",
+                "notify-send -i \"/usr/share/icons/uwuio/icon.png\" \"{}\" \"{}\"",
                 name, msg
             ),
         ])
